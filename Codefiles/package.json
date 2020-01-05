@@ -1,0 +1,54 @@
+{
+  "name": "ece651",
+  "version": "1.0.0",
+  "description": "Project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha ./test/test.js --timeout 10000 --exit",
+    "_comment": "Note: --exit in the test element is to force the test program to exit after finishing in case we use done()",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
+  },
+  "nyc": {
+    "_comment": "Purpose of this part: to do code coverage within Mocha/Chai using Istanbul",
+    "register": "babel-register",
+    "include": [
+      "**/*.js",
+      "./*.js"
+    ],
+    "exclude": [
+      "**/node_modules/**",
+      "**/test/**",
+      "**/coverage/**"
+    ],
+    "all": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "gitlab@git.uwaterloo.ca:ece651-webapp/CampGrounds.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.2",
+    "babel": "^6.23.0",
+    "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "mocha": "^6.0.2",
+    "mongoose": "^5.4.15",
+    "node-geocoder": "^3.22.0",
+    "nodemailer": "^5.1.1",
+    "nyc": "^13.3.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^5.0.1",
+    "sinon": "^7.3.0",
+    "supertest": "^4.0.0"
+  }
+}

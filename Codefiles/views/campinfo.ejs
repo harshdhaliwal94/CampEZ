@@ -1,0 +1,126 @@
+<% include partials/header %>
+<div>
+<div class="container">
+    <div class="row"style="padding:2%">
+       
+       <div class="col-md-6 col-xs-12">
+           <h2 class="card-title" style="text-align:center"><%=camp.name%></h2>
+            <div class="card border-info mb-3" style="width: 30rem;">
+  <img class="card-img-top" src="<%= camp.image %>" alt="Campground image">
+  <div class="card-body">
+   <h5 class="card-title"><%= camp.address %></h5>
+<p class="card-text"><%= camp.description %></p> 
+<p>
+    <a class="btn btn-success" href="/comments/new/<%= camp._id %>">Add New Comment</a>
+</p>
+
+<% camp.comments.forEach(function(comment){  %>
+
+    <p>
+        <strong><%= comment.author %></strong> - <%= comment.text %>
+        <% if( loggedUser && (loggedUser.username===comment.author || loggedUser.isAdminType)){ %>
+        <form action="/deletecomment/<%=comment._id %>/<%= camp._id %>" method="POST" class="delete-form">
+          <button class="btn btn-sm btn-outline-danger">Delete Comment</button>
+        </form>
+        
+         <% } %>
+    </p>
+<% }) %>
+
+  <% if( loggedUser && loggedUser.isAdminType){ %>
+       
+        <form action="/deletecamp/<%= camp._id %>" method="POST" class="delete-form">
+          <button class="btn btn-danger">Delete Campground</button>
+        </form>
+        <% } %>
+
+</div>
+
+</div>
+
+
+
+           
+        <a href="/camplist" class="text-dark"><i class="fas fa-arrow-circle-left fa-3x" size:9x></i></a>
+            
+            
+     
+            
+            
+
+       </div>
+       
+       
+       
+
+        
+        
+        
+     <div class="col-md-6 col-xs-12" style="padding:5%">
+                 	<div class="card border-secondary mb-3" style="max-width: 18rem;">
+  <div class="card-header">Contact Details</div>
+  <div class="card-body text-secondary">
+    <h6 class="card-title">For information or to make reservations,</h6>
+    <p class="card-text">
+    <p><i class="fas fa-phone"></i>  <%= camp.tel %></p>
+    <p><i class="fas fa-fax"></i>  <%= camp.fax %>(Fax)</p>
+    <p><i class="fas fa-envelope"></i>
+            <a href="mailto:<%= camp.email %>">  <%= camp.email %></a>
+    
+    </p>
+  </div>
+  <div id="map"></div>
+</div>
+         
+     </div>   
+
+        
+        
+        
+        
+        
+    </div>
+</div>
+
+
+</div>
+
+
+<!--<style type="text/css">-->
+<!--	#map {-->
+<!--    		height: 400px;-->
+<!--    		width: 100%;-->
+<!--	}-->
+<!--</style>-->
+	
+<script>
+  function initMap() {
+    var lat = <%= camp.lat %>;
+    var lng = <%= camp.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= camp.name %><br />
+      <%= camp.address %></strong>
+      <p><%= camp.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }	
+</script>
+<script async defer src= <%= maplink %> ></script>
+
+
+<% include partials/footer %>

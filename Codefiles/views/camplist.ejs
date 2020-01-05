@@ -1,0 +1,52 @@
+<% include partials/header %>
+     <header class="jumbotron ">
+         <div class="container">
+             <% if(success && success.length > 0) { %>
+       <div class="alert alert-success"><p><%= success %></p></div>
+     <% } %>
+             <h1 style="text-shadow: 0px 4px 8px rgba(0,0,0,0.4),
+						0px 8px 13px rgba(0,0,0,0.4),
+						0px 10px 15px rgba(0,0,0,0.4);">View a collection of hand-picked campgrounds</h1>
+             <p style="text-shadow: 0px 4px 8px rgba(0,0,0,0.4),
+						0px 8px 13px rgba(0,0,0,0.4),
+						0px 10px 15px rgba(0,0,0,0.4);">Or advertise you campground!</p>
+             <p>
+                <a class="btn btn-success btn-large" href="/addcamp"><i class="fas fa-tree"></i></i> Add New Campground</a>
+             </p>
+         </div>
+     </header>
+     
+ 
+     
+  <div class="container">    
+     
+     <div class="row d-flex">
+        <% camplist.forEach(function(campground){ %>
+        <div class="col-lg-3 col-sm-6 mb-4 ">
+            
+        <div class="card-deck">    
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="<%= campground.image %>" alt="Card image cap" style=height:150px;">
+            <div class="card-body">
+                <h5 class="card-title"><%= campground.name %></h5>
+                <p class="card-text"><%= campground.address %></p>
+                <a href="/campinfo?id=<%=campground._id%>" class="btn btn-outline-primary">More Info</a>
+                <a href="#" class="btn btn-outline-danger"><i class="far fa-heart"></i></a>
+            </div>
+        </div>
+        </div>
+</div>
+        
+        
+        
+        
+        
+
+        
+        
+        
+        <% }); %>
+    </div>
+</div>
+
+<% include partials/footer %>

@@ -1,0 +1,41 @@
+<% include partials/header %>
+<div class="container">
+    <div class="row">
+       
+        <div style="width: 30%; margin: 25px auto;">
+             <h1 style="text-align: center">Add New Campground</h1>
+            <form action="/addcamptodb" method="POST">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="name" placeholder="Camp name" required="true">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="image" placeholder="Image url" required="true">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" type="text" name="desc" placeholder="Description" required="true" style="height: 150px"></textarea>
+                </div>
+    
+                <div class="form-group">
+    			    <label for="address">Location</label>
+    			    <input class="form-control" type="text" name="address" id="address" placeholder="Victoria Park, Kitchener">
+		        </div>
+                 <div class="form-group">
+                    <input class="form-control" type="text" name="tel" placeholder="Telephone" required="true">
+                </div>
+                 <div class="form-group">
+                    <input class="form-control" type="text" name="fax" placeholder="Fax" required="true">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="email" name="email" placeholder="Email" required="true">
+                </div>
+                
+                <div class="form-group">
+                    <button class="btn btn-lg btn-success btn-block" >Submit</button>
+                </div>
+            </form>
+              <a href="/camplist" style="color:#5D5C61;"><i class="fas fa-arrow-circle-left fa-3x" size:9x></i></a>
+        </div>
+    </div>
+</div>
+<% include partials/footer %>
+
